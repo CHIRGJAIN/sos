@@ -386,7 +386,11 @@ export const ngoOrganizations: NGO[] = [
     name: "Red Cross Rapid Response",
     verificationStatus: "VERIFIED",
     documents: ["registration.pdf", "compliance-2026.pdf"],
-    categories: ["Direct service", "Disaster relief"],
+    categories: [
+      "Direct service",
+      "Indirect social fulfillment/cause",
+      "Corporate CSR partnerships",
+    ],
     partnershipTypes: ["Corporate CSR", "Public welfare"],
     corporateDonations: 180000,
     employeeVolunteers: 92,

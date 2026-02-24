@@ -20,6 +20,7 @@ const NgoFeedPage: React.FC = () => {
   const [category, setCategory] = useState("All");
   const [selectedId, setSelectedId] = useState<string | null>(ngoPosts[0]?.id || null);
   const [raisedOverrides, setRaisedOverrides] = useState<Record<string, number>>({});
+  const [uploadedDocs, setUploadedDocs] = useState<string[]>([]);
 
   const ngo = ngoOrganizations[0];
 
@@ -38,6 +39,12 @@ const NgoFeedPage: React.FC = () => {
 
   const totalGoal = filtered.reduce((sum, item) => sum + item.goalAmount, 0);
   const totalRaised = filtered.reduce((sum, item) => sum + getRaised(item.id, item.raisedAmount), 0);
+
+  const handleDocumentUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []).map((file) => file.name);
+    if (!files.length) return;
+    setUploadedDocs((prev) => [...prev, ...files]);
+  };
 
   return (
     <DashboardShell portal="ngo" title="NGO Feed">
@@ -158,6 +165,10 @@ const NgoFeedPage: React.FC = () => {
                     {ngo?.partnershipTypes?.length ? ngo.partnershipTypes.join(", ") : "-"}
                   </p>
                   <p>
+                    <span className="font-semibold">NGO Types:</span>{" "}
+                    {ngo?.categories?.length ? ngo.categories.join(", ") : "-"}
+                  </p>
+                  <p>
                     <span className="font-semibold">Corporate Donations:</span> INR{" "}
                     {(ngo?.corporateDonations || 0).toLocaleString()}
                   </p>
@@ -168,6 +179,27 @@ const NgoFeedPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
+                  <div className="rounded-lg border border-primary/20 bg-secondary/45 p-2 text-xs">
+                    <p className="mb-1 font-semibold">Verification Documents Upload</p>
+                    <label className="inline-flex cursor-pointer rounded-lg border border-primary/20 bg-popover px-2.5 py-1.5 text-xs">
+                      Upload document
+                      <input
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                        multiple
+                        className="hidden"
+                        onChange={handleDocumentUpload}
+                      />
+                    </label>
+                    <p className="mt-1 text-muted-foreground">
+                      Existing: {ngo?.documents?.join(", ") || "-"}
+                    </p>
+                    {uploadedDocs.length > 0 && (
+                      <p className="text-muted-foreground">
+                        Newly added: {uploadedDocs.join(", ")}
+                      </p>
+                    )}
+                  </div>
                   <p className="text-xs text-muted-foreground">Real-time service reports</p>
                   {ngo?.activityLogs?.map((log) => (
                     <div key={log.id} className="rounded-lg border border-primary/20 bg-secondary/45 p-2 text-xs">

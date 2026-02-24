@@ -29,6 +29,34 @@ const scopeLabel: Record<Scope, string> = {
 
 const currency = (amount: number) => `INR ${amount.toLocaleString()}`;
 
+const receivedChannels: Array<{
+  key: DonationTransaction["channel"];
+  label: string;
+}> = [
+  { key: "PUBLIC", label: "Public" },
+  { key: "BUSINESS_CONTRIBUTION", label: "Business Contributions (incl. advertising)" },
+  { key: "GOVERNMENT", label: "Government (subsidies/grants/political)" },
+];
+
+const usedBuckets = [
+  "Recipients",
+  "NGO/Social Sector",
+  "Movements",
+  "Welfare",
+  "Propaganda/Fulfillment",
+] as const;
+
+const reservoirSourceLabels: Record<string, string> = {
+  ADS: "Company Ads / Promotions",
+  MERCH: "Merchandise",
+  FUNDRAISING: "Fundraising",
+  PUBLIC_UNUSED: "Public Donations (unused/returned)",
+  GOVT_GRANT: "Government Subsidies/Grants",
+  BUSINESS_CSR: "Business CSR / Collaborations",
+  INSURANCE_REIMBURSE: "Insurance Compensatory",
+  PUBLIC_SECTOR_SURPLUS: "Public Sector Surplus/Welfare",
+};
+
 const usageBucketLabel = (value: string) => {
   const normalized = value.toLowerCase();
   if (normalized.includes("ngo") || normalized.includes("welfare")) return "NGO/Social Sector";
@@ -63,26 +91,42 @@ const TransparencyBoard: React.FC<TransparencyBoardProps> = ({ adminView = false
   const selected = dataset.find((item) => item.id === selectedId) || null;
 
   const receivedBreakdown = useMemo(() => {
+    const initial: Record<string, number> = {
+      PUBLIC: 0,
+      BUSINESS_CONTRIBUTION: 0,
+      GOVERNMENT: 0,
+    };
     return receivedRows.reduce<Record<string, number>>((acc, row) => {
       acc[row.channel] = (acc[row.channel] || 0) + row.amount;
       return acc;
-    }, {});
+    }, initial);
   }, [receivedRows]);
 
   const usedBreakdown = useMemo(() => {
+    const initial: Record<string, number> = {
+      Recipients: 0,
+      "NGO/Social Sector": 0,
+      Movements: 0,
+      Welfare: 0,
+      "Propaganda/Fulfillment": 0,
+    };
     return usedRows.reduce<Record<string, number>>((acc, row) => {
       const key = usageBucketLabel(row.for);
       const amount = Number((row.amount || "0").replace(/[^\d]/g, "")) || 0;
       acc[key] = (acc[key] || 0) + amount;
       return acc;
-    }, {});
+    }, initial);
   }, [usedRows]);
 
   const reservoirBreakdown = useMemo(() => {
+    const initial: Record<string, number> = Object.keys(reservoirSourceLabels).reduce(
+      (acc, key) => ({ ...acc, [key]: 0 }),
+      {} as Record<string, number>
+    );
     return reservoirRows.reduce<Record<string, number>>((acc, row) => {
       acc[row.sourceType] = (acc[row.sourceType] || 0) + (row.direction === "CREDIT" ? row.amount : -row.amount);
       return acc;
-    }, {});
+    }, initial);
   }, [reservoirRows]);
 
   const totalReceived = receivedRows.reduce((sum, row) => sum + row.amount, 0);
@@ -201,21 +245,22 @@ const TransparencyBoard: React.FC<TransparencyBoardProps> = ({ adminView = false
               </p>
               <div className="mt-2 space-y-1.5 text-sm">
                 {tab === "RECEIVED" &&
-                  Object.entries(receivedBreakdown).map(([key, value]) => (
+                  receivedChannels.map(({ key, label }) => (
                     <p key={key}>
-                      <span className="font-semibold">{key}:</span> {currency(value)}
+                      <span className="font-semibold">{label}:</span> {currency(receivedBreakdown[key] || 0)}
                     </p>
                   ))}
                 {tab === "USED" &&
-                  Object.entries(usedBreakdown).map(([key, value]) => (
-                    <p key={key}>
-                      <span className="font-semibold">{key}:</span> {currency(value)}
+                  usedBuckets.map((bucket) => (
+                    <p key={bucket}>
+                      <span className="font-semibold">{bucket}:</span> {currency(usedBreakdown[bucket] || 0)}
                     </p>
                   ))}
                 {tab === "RESERVOIR" &&
-                  Object.entries(reservoirBreakdown).map(([key, value]) => (
+                  Object.keys(reservoirSourceLabels).map((key) => (
                     <p key={key}>
-                      <span className="font-semibold">{key}:</span> {currency(value)}
+                      <span className="font-semibold">{reservoirSourceLabels[key]}:</span>{" "}
+                      {currency(reservoirBreakdown[key] || 0)}
                     </p>
                   ))}
               </div>
