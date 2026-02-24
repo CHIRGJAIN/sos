@@ -1,0 +1,6 @@
+:root {
+  --sidebar-expanded: 260px;
+  --sidebar-collapsed: 84px;
+  --topbar-height: 72px;
+  --content-max-width: 1380px;
+}

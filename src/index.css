@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import './styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 25 100% 94%;
+    --foreground: 20 20% 15%;
+
+    --card: 30 60% 95%;
+    --card-foreground: 20 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 20% 15%;
+
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 50% 90%;
+    --secondary-foreground: 20 20% 15%;
+
+    --muted: 30 30% 88%;
+    --muted-foreground: 20 10% 45%;
+
+    --accent: 0 75% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 40% 82%;
+    --input: 30 40% 85%;
+    --ring: 24 95% 53%;
+
+    --radius: 1.25rem;
+
+    /* Custom tokens */
+    --gradient-start: 20 90% 40%;
+    --gradient-mid: 24 95% 53%;
+    --gradient-end: 35 60% 80%;
+    --warm-beige: 30 60% 95%;
+    --peach: 25 80% 90%;
+    --neumorphic-light: 0 0% 100%;
+    --neumorphic-dark: 30 20% 75%;
+    --nav-bar: 220 5% 40%;
+    --nav-bar-foreground: 0 0% 100%;
+
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+
+    --shadow-neumorphic: 8px 8px 16px hsl(30 20% 75% / 0.5), -4px -4px 12px hsl(0 0% 100% / 0.7);
+    --shadow-neumorphic-inset: inset 4px 4px 8px hsl(30 20% 75% / 0.4), inset -2px -2px 6px hsl(0 0% 100% / 0.6);
+    --shadow-card: 4px 6px 14px hsl(30 20% 75% / 0.4), -2px -2px 8px hsl(0 0% 100% / 0.5);
+    --shadow-soft: 0 4px 12px hsl(30 20% 75% / 0.3);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .portal-shell {
+    @apply min-h-screen gradient-bg;
+  }
+
+  .portal-shell-center {
+    @apply min-h-screen gradient-bg flex items-stretch justify-stretch;
+  }
+
+  .portal-panel {
+    @apply w-full gradient-bg-warm flex flex-col;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .with-app-nav {
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    .with-app-nav {
+      padding-left: 6.5rem;
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  .gradient-bg {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--gradient-start)) 0%,
+      hsl(var(--gradient-mid)) 40%,
+      hsl(var(--gradient-end)) 100%
+    );
+  }
+
+  .gradient-bg-warm {
+    background: linear-gradient(
+      180deg,
+      hsl(24 95% 53%) 0%,
+      hsl(31 73% 78%) 36%,
+      hsl(37 43% 90%) 100%
+    );
+  }
+
+  .shadow-neumorphic {
+    box-shadow: var(--shadow-neumorphic);
+  }
+
+  .shadow-neumorphic-inset {
+    box-shadow: var(--shadow-neumorphic-inset);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .font-serif-display {
+    font-family: var(--font-serif);
+  }
+
+  .phone-container {
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+  }
+}
