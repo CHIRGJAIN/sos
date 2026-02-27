@@ -8,10 +8,10 @@ interface ContentShellProps {
 
 const ContentShell: React.FC<ContentShellProps> = ({ children, className }) => {
   return (
-    <main className="px-3 pb-5 pt-4 sm:px-4 lg:px-6 lg:pb-6 lg:pt-5 xl:px-8">
+    <main className="px-3 pb-4 pt-3 sm:px-4 lg:px-6 lg:pb-5 lg:pt-4 xl:px-8">
       <div
         className={cn(
-          "mx-auto min-h-[calc(100dvh-72px-2.5rem)] w-full max-w-[1380px] rounded-3xl border border-primary/20 bg-popover/72 p-4 shadow-[0_16px_44px_hsl(26_40%_25%_/_0.2)] backdrop-blur-sm sm:p-5 lg:p-6 xl:p-8",
+          "mx-auto min-h-[calc(100dvh-84px-2rem)] w-full max-w-[1480px] rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.06)] sm:p-5 lg:p-6 xl:p-7",
           className
         )}
       >

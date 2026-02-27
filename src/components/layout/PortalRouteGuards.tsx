@@ -24,7 +24,7 @@ export const RedirectIfAuthenticated: React.FC<GuardProps> = ({ portal, children
   if (isLoggedIn(portal)) {
     const redirectMap: Record<Portal, string> = {
       user: "/user/home",
-      ngo: "/ngo/feed",
+      ngo: "/ngo/dashboard",
       admin: "/admin/dashboard",
       resource: "/resource/handle",
       authority: "/authority/dashboard",

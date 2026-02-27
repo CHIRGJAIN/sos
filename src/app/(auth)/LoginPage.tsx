@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth, Portal } from '@/contexts/AuthContext';
+import { useSosApp } from '@/sos/context/SosAppContext';
 
 interface LoginPageProps {
   portal: Portal;
@@ -17,6 +18,11 @@ const portalRoutes: Array<{ portal: Portal; label: string; path: string }> = [
   { portal: 'admin', label: 'Admin', path: '/admin/login' },
 ];
 
+const sosCredentialsByPortal = {
+  authority: { email: 'authority@sos.gov', password: 'authority123' },
+  ngo: { email: 'ngo@sos.org', password: 'ngo123' },
+} as const;
+
 const LoginPage: React.FC<LoginPageProps> = ({ portal, title, redirectTo }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +30,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ portal, title, redirectTo }) => {
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState('');
   const { loginWithPassword, registerWithPassword, getDemoCredentials } = useAuth();
+  const { login: loginToSos } = useSosApp();
   const navigate = useNavigate();
   const demo = getDemoCredentials(portal);
 
@@ -34,6 +41,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ portal, title, redirectTo }) => {
       : loginWithPassword(portal, email, password);
 
     if (result.success) {
+      if (portal === 'authority' || portal === 'ngo') {
+        const sosCreds = sosCredentialsByPortal[portal];
+        const sosResult = loginToSos(portal, sosCreds.email, sosCreds.password);
+
+        if (!sosResult.success) {
+          setError(sosResult.message || 'Unable to initialize dashboard session.');
+          return;
+        }
+      }
+
       setError('');
       navigate(redirectTo);
     } else {

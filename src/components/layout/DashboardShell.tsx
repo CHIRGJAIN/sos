@@ -22,7 +22,7 @@ const DashboardShell: React.FC<DashboardShellProps> = ({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen gradient-bg">
+    <div className="min-h-screen bg-slate-100">
       <Sidebar
         portal={portal}
         collapsed={collapsed}
@@ -33,7 +33,7 @@ const DashboardShell: React.FC<DashboardShellProps> = ({
       <div
         className={cn(
           "min-h-screen transition-[padding-left] duration-200",
-          collapsed ? "lg:pl-[84px]" : "lg:pl-[260px]"
+          collapsed ? "lg:pl-[92px]" : "lg:pl-[292px]"
         )}
       >
         <Topbar

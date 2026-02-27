@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import './styles/tokens.css';
 
 @tailwind base;
@@ -7,54 +7,54 @@
 
 @layer base {
   :root {
-    --background: 25 100% 94%;
-    --foreground: 20 20% 15%;
+    --background: 220 18% 95%;
+    --foreground: 222 47% 11%;
 
-    --card: 30 60% 95%;
-    --card-foreground: 20 20% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 20% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 24 95% 53%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 50% 90%;
-    --secondary-foreground: 20 20% 15%;
+    --secondary: 220 16% 92%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 30 30% 88%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 220 14% 93%;
+    --muted-foreground: 215 16% 46%;
 
-    --accent: 0 75% 50%;
+    --accent: 221 83% 53%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 40% 82%;
-    --input: 30 40% 85%;
-    --ring: 24 95% 53%;
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 221 83% 53%;
 
-    --radius: 1.25rem;
+    --radius: 0.9rem;
 
     /* Custom tokens */
-    --gradient-start: 20 90% 40%;
-    --gradient-mid: 24 95% 53%;
-    --gradient-end: 35 60% 80%;
-    --warm-beige: 30 60% 95%;
-    --peach: 25 80% 90%;
+    --gradient-start: 221 83% 53%;
+    --gradient-mid: 215 83% 60%;
+    --gradient-end: 201 94% 74%;
+    --warm-beige: 220 18% 95%;
+    --peach: 215 30% 90%;
     --neumorphic-light: 0 0% 100%;
-    --neumorphic-dark: 30 20% 75%;
-    --nav-bar: 220 5% 40%;
+    --neumorphic-dark: 216 20% 80%;
+    --nav-bar: 216 20% 17%;
     --nav-bar-foreground: 0 0% 100%;
 
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Plus Jakarta Sans', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
 
-    --shadow-neumorphic: 8px 8px 16px hsl(30 20% 75% / 0.5), -4px -4px 12px hsl(0 0% 100% / 0.7);
-    --shadow-neumorphic-inset: inset 4px 4px 8px hsl(30 20% 75% / 0.4), inset -2px -2px 6px hsl(0 0% 100% / 0.6);
-    --shadow-card: 4px 6px 14px hsl(30 20% 75% / 0.4), -2px -2px 8px hsl(0 0% 100% / 0.5);
-    --shadow-soft: 0 4px 12px hsl(30 20% 75% / 0.3);
+    --shadow-neumorphic: 0 8px 24px hsl(215 22% 27% / 0.08);
+    --shadow-neumorphic-inset: inset 0 1px 0 hsl(0 0% 100% / 0.7);
+    --shadow-card: 0 6px 18px hsl(215 22% 27% / 0.08);
+    --shadow-soft: 0 3px 10px hsl(215 22% 27% / 0.08);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -80,7 +80,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
   }
 }
 
@@ -122,9 +122,9 @@
   .gradient-bg-warm {
     background: linear-gradient(
       180deg,
-      hsl(24 95% 53%) 0%,
-      hsl(31 73% 78%) 36%,
-      hsl(37 43% 90%) 100%
+      hsl(221 83% 53%) 0%,
+      hsl(215 83% 60%) 36%,
+      hsl(201 94% 74%) 100%
     );
   }
 
