@@ -63,11 +63,7 @@ const SosRoutes = () => {
       />
       <Route
         path="/user/sos"
-        element={
-          <RequireWebRoleAuth role="citizen">
-            <PortalWorkspacePage role="citizen" module="sos" />
-          </RequireWebRoleAuth>
-        }
+        element={<Navigate to="/user/incident" replace />}
       />
       <Route
         path="/user/incident"

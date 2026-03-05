@@ -38,7 +38,6 @@ import { DemoRole } from "@/web/types";
 
 type CitizenModule =
   | "dashboard"
-  | "sos"
   | "incident"
   | "spectator"
   | "history"
@@ -71,7 +70,6 @@ const PortalWorkspacePage: React.FC<PortalWorkspacePageProps> = ({ role, module 
 
   const citizenNav: ShellNavItem[] = [
     { key: "home", label: "Home", path: "/user/home", icon: Home, section: "main" },
-    { key: "sos", label: "SOS", path: "/user/sos", icon: ShieldAlert, section: "main" },
     { key: "incident", label: "Active Incident", path: "/user/incident", icon: Radar, section: "main" },
     { key: "revelation", label: "Revelation", path: "/user/revelation", icon: FileWarning, section: "operations" },
     { key: "spectator", label: "Spectator Assist", path: "/user/spectator", icon: HeartPulse, section: "operations" },
@@ -108,7 +106,6 @@ const PortalWorkspacePage: React.FC<PortalWorkspacePageProps> = ({ role, module 
     switch (module as CitizenModule) {
       case "dashboard":
         return <CitizenDashboardModule />;
-      case "sos":
       case "incident":
         return <CitizenSosModule />;
       case "spectator":

@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Radio, ShieldAlert } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShieldAlert } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -24,7 +24,7 @@ const roleLabelMap = {
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ role, navItems, collapsed, onToggleCollapsed }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { profile, authSession, beginSosHold } = useSosWeb();
+  const { profile, authSession } = useSosWeb();
 
   return (
     <aside
@@ -54,31 +54,11 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ role, navItems, collapsed, on
         </Button>
       </div>
 
-      <div className="mt-4 px-1">
-        <Button
-          className={cn(
-            "w-full rounded-full bg-[linear-gradient(145deg,#FF3B30_0%,#FF9500_100%)] text-white shadow-[0_12px_28px_rgba(255,59,48,0.26)] hover:opacity-95",
-            collapsed && "px-0",
-          )}
-          onClick={() => {
-            if (role === "citizen") {
-              beginSosHold();
-              navigate("/user/sos");
-            }
-          }}
-        >
-          <Radio className={cn("h-4 w-4", !collapsed && "mr-2")} />
-          {!collapsed ? "SOS Action" : null}
-        </Button>
-      </div>
-
       <ScrollArea className="mt-4 flex-1">
         <nav className="space-y-1 pr-1">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const active =
-              location.pathname === item.path ||
-              (item.path === "/user/sos" && location.pathname === "/user/incident");
+            const active = location.pathname === item.path;
 
             return (
               <button

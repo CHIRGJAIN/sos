@@ -7,9 +7,9 @@ const CitizenDashboardModule: React.FC = () => {
     <div className="flex min-h-[calc(100dvh-8.5rem)] w-full items-center justify-center overflow-hidden lg:min-h-[calc(100dvh-6.5rem)]">
       <button
         type="button"
-        onClick={() => navigate("/user/sos")}
+        onClick={() => navigate("/user/incident")}
         className="relative flex aspect-square w-full max-w-[calc(100dvh-7rem)] items-center justify-center rounded-full"
-        aria-label="Open SOS activation"
+        aria-label="Open active incident"
       >
         <span className="absolute inset-0 rounded-full border border-red-200 bg-red-500/5 animate-pulse" />
         <span className="absolute inset-[12%] rounded-full border border-red-200 bg-red-500/10 animate-pulse [animation-delay:150ms]" />
